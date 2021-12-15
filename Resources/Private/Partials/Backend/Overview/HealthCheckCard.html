@@ -1,0 +1,33 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<div class="col-md-4">
+    <div class="panel panel-default">
+        <div
+            class="panel-body {f:if(condition: '{healthCheck.status} == 200 || {healthCheck.status} == completed', then: 'label-success', else: 'label-danger')}">
+            <div>
+                <h1 style="color: white">
+                    {heading}
+                    <span class="pull-right label">
+                        <f:if condition="{healthCheck.status} == 200 || {healthCheck.status} == completed">
+                            <f:then><f:translate
+                                key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_overview.xlf:online"/></f:then>
+                            <f:else><f:translate
+                                key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_overview.xlf:offline"/></f:else>
+                        </f:if>
+                    </span>
+                </h1>
+                <div class="pull-right">
+                    <f:if condition="{healthCheck.version}">
+                        <f:then>
+                            <span class="badge">{healthCheck.version}</span>
+                        </f:then>
+                        <f:else>
+                            <span class="badge"><f:translate
+                                key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_overview.xlf:no_version"/></span>
+                        </f:else>
+                    </f:if>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

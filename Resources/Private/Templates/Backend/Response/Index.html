@@ -1,0 +1,48 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<f:layout name="Default"/>
+
+<f:section name="Content">
+    <h1>
+        <f:translate
+            key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_response.xlf:mlang_tabs_tab"/>
+    </h1>
+
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>
+                    <f:translate
+                        key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:text"/>
+                </th>
+                <th>
+                    <f:translate
+                        key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:response_name"/>
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+            <f:for each="{responses}" as="response">
+                <tr>
+                    <td>{response.text}</td>
+                    <td>{response.response_name}</td>
+                    <td class="small">
+                        <f:link.action action="showUpdate"
+                                       arguments="{responseId: '{response.id}', responseText: '{response.text}',responseName: '{response.response_name}'}">
+                            <f:translate
+                                key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:edit"/>
+                        </f:link.action>
+                    </td>
+                    <td class="small">
+                        <f:link.action action="delete" arguments="{responseId: '{response.id}'}">
+                            <f:translate
+                                key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:delete"/>
+                        </f:link.action>
+                    </td>
+                </tr>
+            </f:for>
+        </table>
+    </div>
+</f:section>
+
+</html>

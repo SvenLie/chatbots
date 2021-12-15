@@ -1,0 +1,7 @@
+module.tx_chatbotrasa {
+    view {
+        templateRootPaths.10 = EXT:chatbot_rasa/Resources/Private/Templates/Backend/
+        partialRootPaths.10 = EXT:chatbot_rasa/Resources/Private/Partials/Backend/
+        layoutRootPaths.10 = EXT:chatbot_rasa/Resources/Private/Layouts/Backend/
+    }
+}

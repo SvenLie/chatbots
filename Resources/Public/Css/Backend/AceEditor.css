@@ -1,0 +1,14 @@
+.typo3-aceeditor-module {
+    margin: -24px;
+    margin-top: 12px;
+}
+
+.typo3-aceeditor-module #editor {
+    padding: 24px;
+    width: 100%;
+    height: calc(100vh - 65px);
+}
+
+.typo3-aceeditor-module #content {
+    display: none;
+}

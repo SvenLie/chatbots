@@ -1,0 +1,9 @@
+tr td {
+    width: unset;
+    white-space: unset;
+}
+
+.small {
+    width: 1px;
+    white-space: nowrap;
+}

@@ -1,0 +1,56 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<f:layout name="Default"/>
+
+<f:section name="Content">
+    <h1>
+        <f:translate
+            key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_response.xlf:add_response"/>
+    </h1>
+
+    <div class="col-md-12">
+        <f:form action="add">
+            <f:form.hidden id="responseId" name="responseId"/>
+            <div class="form-group">
+                <label for="responseText">
+                    <f:translate
+                        key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:text"/>
+                </label>
+                <f:form.textfield name="responseText" class="form-control" id="responseText"/>
+            </div>
+            <div class="form-group">
+                <label for="responseName">
+                    <f:translate
+                        key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:response_name"/>
+                </label>
+                <f:form.select name="responseName" id="responseName" class="form-control"
+                               options="{responseGroups}"
+                               optionValueField="response_name" optionLabelField="response_name"
+                               prependOptionLabel="{f:translate(key: 'LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:please_select')}">
+                    <f:form.select.option value="-1">
+                        <f:translate
+                            key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_response.xlf:new_response_name"/>
+                    </f:form.select.option>
+                </f:form.select>
+            </div>
+
+            <div class="form-group hidden">
+                <label for="responseNameOther">
+                    <f:translate
+                        key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_response.xlf:new_response_name"/>
+                </label>
+                <f:form.textfield name="responseName" class="form-control" id="responseNameOther"
+                                  disabled="disabled"/>
+            </div>
+
+            <f:form.button class="btn btn-success">
+                <f:translate
+                    key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:add"/>
+            </f:form.button>
+        </f:form>
+    </div>
+    <f:be.pageRenderer
+        includeRequireJsModules="{0:'TYPO3/CMS/ChatbotRasa/Backend/Modules/ShowUpdateAndAddResponse'}"/>
+</f:section>
+
+</html>

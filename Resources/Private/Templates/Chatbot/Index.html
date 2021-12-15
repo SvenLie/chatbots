@@ -1,0 +1,34 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<f:layout name="Default"/>
+
+<f:section name="Content">
+    <button id="startChatButton" class="chatbot_rasa btn">
+        <f:translate key="LLL:EXT:chatbot_rasa/Resources/Private/Language/locallang.xlf:chat-now"/>
+    </button>
+
+    <div id="chatbotRasaChat" class="chatbot_rasa chat hidden">
+        <div id="chatbotChatHeader">
+            <a id="closeChatButton">
+                <i class="fas fa-times"></i>
+            </a>
+        </div>
+
+        <div id="messages">
+        </div>
+
+
+        <div id="chatbotInputDiv">
+            <button id="sendChatButton">
+                <f:translate key="LLL:EXT:chatbot_rasa/Resources/Private/Language/locallang.xlf:send-message"/>
+            </button>
+            <div>
+                <f:form.textfield id="chatbotInputField"
+                                  placeholder="{f:translate(key: 'LLL:EXT:chatbot_rasa/Resources/Private/Language/locallang.xlf:input-placeholder')}"/>
+            </div>
+        </div>
+
+    </div>
+</f:section>
+
+</html>

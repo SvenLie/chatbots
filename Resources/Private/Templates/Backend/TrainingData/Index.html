@@ -1,0 +1,47 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<f:layout name="Default"/>
+<f:section name="Content">
+    <h1>
+        <f:translate
+            key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:mlang_tabs_tab"/>
+    </h1>
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>
+                    <f:translate
+                        key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:text"/>
+                </th>
+                <th>
+                    <f:translate
+                        key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:intent"/>
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+            <f:for each="{trainingData}" as="trainingDataItem">
+                <tr>
+                    <td>{trainingDataItem.text}</td>
+                    <td>{trainingDataItem.intent}</td>
+                    <td class="small">
+                        <f:link.action action="showUpdate"
+                                       arguments="{trainingDataId: '{trainingDataItem.id}', trainingDataText: '{trainingDataItem.text}',trainingDataIntent: '{trainingDataItem.intent}'}">
+                            <f:translate
+                                key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:edit"/>
+                        </f:link.action>
+                    </td>
+                    <td class="small">
+                        <f:link.action action="delete" arguments="{trainingDataId: '{trainingDataItem.id}'}">
+                            <f:translate
+                                key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:delete"/>
+                        </f:link.action>
+                    </td>
+                </tr>
+            </f:for>
+        </table>
+    </div>
+</f:section>
+
+</html>

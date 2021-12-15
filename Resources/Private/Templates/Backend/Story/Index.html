@@ -1,0 +1,43 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<f:layout name="Default"/>
+
+<f:section name="Content">
+    <h1>
+        <f:translate
+            key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_story.xlf:mlang_tabs_tab"/>
+    </h1>
+
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>
+                    <f:translate
+                        key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:name"/>
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+            <f:for each="{stories}" as="story">
+                <tr>
+                    <td>{story.name}</td>
+                    <td class="small">
+                        <f:link.action action="showUpdate"
+                                       arguments="{storyId: '{story.id}', storyStory: '{story.story}'}">
+                            <f:translate
+                                key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:edit"/>
+                        </f:link.action>
+                    </td>
+                    <td class="small">
+                        <f:link.action action="delete" arguments="{storyId: '{story.id}'}">
+                            <f:translate
+                                key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:delete"/>
+                        </f:link.action>
+                    </td>
+                </tr>
+            </f:for>
+        </table>
+    </div>
+</f:section>
+
+</html>

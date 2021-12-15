@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2020-01-15T09:29:11Z"
+          product-name="chatbot_rasa">
+        <header/>
+        <body>
+            <trans-unit id="mlang_tabs_tab" xml:space="preserve">
+                <source>Overview</source>
+            </trans-unit>
+            <trans-unit id="online" xml:space="preserve">
+                <source>Online</source>
+            </trans-unit>
+            <trans-unit id="offline" xml:space="preserve">
+                <source>Offline</source>
+            </trans-unit>
+            <trans-unit id="no_version" xml:space="preserve">
+                <source>No version</source>
+            </trans-unit>
+            <trans-unit id="availability" xml:space="preserve">
+                <source>Availability of RASA clients</source>
+            </trans-unit>
+            <trans-unit id="train_new_model" xml:space="preserve">
+                <source>Train new RASA model</source>
+            </trans-unit>
+            <trans-unit id="train" xml:space="preserve">
+                <source>Train RASA</source>
+            </trans-unit>
+            <trans-unit id="training_started" xml:space="preserve">
+                <source>Training of new RASA model was started. It can take some minutes.</source>
+            </trans-unit>
+            <trans-unit id="training_not_started" xml:space="preserve">
+                <source>Training of new RASA model wasn't started. Please check the configuration.</source>
+            </trans-unit>
+            <trans-unit id="existing_models" xml:space="preserve">
+                <source>Existing models</source>
+            </trans-unit>
+            <trans-unit id="active" xml:space="preserve">
+                <source>(active)</source>
+            </trans-unit>
+            <trans-unit id="activate" xml:space="preserve">
+                <source>Activate</source>
+            </trans-unit>
+            <trans-unit id="model_not_activated" xml:space="preserve">
+                <source>Model wasn't activated successfully. Please check the configuration.</source>
+            </trans-unit>
+            <trans-unit id="model_activated" xml:space="preserve">
+                <source>Model was activated.</source>
+            </trans-unit>
+            <trans-unit id="model_not_deleted" xml:space="preserve">
+                <source>Model wasn't deleted successfully. Please check the configuration.</source>
+            </trans-unit>
+            <trans-unit id="model_deleted" xml:space="preserve">
+                <source>Model was deleted.</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
