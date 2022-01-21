@@ -142,8 +142,10 @@ class Controller extends ActionController
 
     protected function addCssToBackendView()
     {
-        $this->view->getModuleTemplate()->getPageRenderer()->addCssFile('EXT:chatbot_rasa/Resources/Public/Css/Backend/Table.css');
-        $this->view->getModuleTemplate()->getPageRenderer()->addCssFile('EXT:chatbot_rasa/Resources/Public/Css/Backend/AceEditor.css');
+        if ($this->view instanceof BackendTemplateView) {
+            $this->view->getModuleTemplate()->getPageRenderer()->addCssFile('EXT:chatbot_rasa/Resources/Public/Css/Backend/Table.css');
+            $this->view->getModuleTemplate()->getPageRenderer()->addCssFile('EXT:chatbot_rasa/Resources/Public/Css/Backend/AceEditor.css');
+        }
     }
 
     /*
