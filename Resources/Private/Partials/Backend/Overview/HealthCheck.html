@@ -7,7 +7,7 @@
     <br/>
     <br/>
 </div>
-<f:for each="{healthChecks}" as="healthCheck" key="key">
+<f:for each="{healthChecks}" as="healthCheck" key="key" iteration="iterator">
     <f:render partial="Backend/Overview/HealthCheckCard" arguments="{heading: key, healthCheck: healthCheck}"/>
 </f:for>
 </html>

@@ -4,11 +4,11 @@
     'SvenLie.ChatbotRasa',
     'Chatbot',
     [
-        'Chatbot' => 'index',
+        \SvenLie\ChatbotRasa\Controller\ChatbotController::class => 'index',
     ],
     // non-cacheable actions
     [
-        'Chatbot' => 'index',
+        \SvenLie\ChatbotRasa\Controller\ChatbotController::class => 'index',
     ],
 );
 

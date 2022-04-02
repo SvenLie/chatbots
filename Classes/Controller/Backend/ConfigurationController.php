@@ -32,7 +32,6 @@ class ConfigurationController extends Controller
 
     /**
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
      */
     public function saveAction(): void
@@ -42,9 +41,7 @@ class ConfigurationController extends Controller
         $rasaUsername = $this->request->getArgument('rasaUsername');
         $rasaPassword = $this->request->getArgument('rasaPassword');
 
-        $this->extensionConfiguration->set('chatbot_rasa', 'rasaUrl', $rasaUrl);
-        $this->extensionConfiguration->set('chatbot_rasa', 'rasaUsername', $rasaUsername);
-        $this->extensionConfiguration->set('chatbot_rasa', 'rasaPassword', $rasaPassword);
+        $this->extensionConfiguration->set('chatbot_rasa', ['rasaUrl' => $rasaUrl, 'rasaUsername' => $rasaUsername, 'rasaPassword' => $rasaPassword]);
 
 
         $this->addFlashMessage(

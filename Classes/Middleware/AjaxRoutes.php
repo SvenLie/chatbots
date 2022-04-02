@@ -14,7 +14,6 @@ use SvenLie\ChatbotRasa\Utility\RasaApiUtility;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Http\Response;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
@@ -95,8 +94,8 @@ class AjaxRoutes implements MiddlewareInterface
         if ($accessToken) {
             $chatTokenResponse = $this->rasaApiUtility->getChatToken($accessToken);
 
-            if (!empty($chatTokenResponse['chat_token'])) {
-                $chatToken = $chatTokenResponse['chat_token'];
+            if (!empty($chatTokenResponse->chat_token)) {
+                $chatToken = $chatTokenResponse->chat_token;
 
                 $jwtAccessTokenResponse = $this->rasaApiUtility->authenticateWithChatToken($chatToken);
 
@@ -110,15 +109,10 @@ class AjaxRoutes implements MiddlewareInterface
                     $chatSession->setAccessToken($jwtAccessToken);
                     $chatSession->setTimestamp(time());
 
-                    /*
-                     * Change for T3 v11
-                     */
-                    /** @var ObjectManager $objectManager */
-                    $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
                     /** @var ChatSessionRepository $chatSessionRepository */
-                    $chatSessionRepository = $objectManager->get(ChatSessionRepository::class);
+                    $chatSessionRepository = GeneralUtility::makeInstance(ChatSessionRepository::class);
                     /** @var PersistenceManager $persistenceManager */
-                    $persistenceManager = $objectManager->get(PersistenceManager::class);
+                    $persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
 
                     $chatSessionRepository->add($chatSession);
                     $persistenceManager->persistAll();
@@ -157,15 +151,10 @@ class AjaxRoutes implements MiddlewareInterface
         $senderToken = $content->sender_token;
 
         if (!empty($senderToken)) {
-            /*
-            * Change for T3 v11
-            */
-            /** @var ObjectManager $objectManager */
-            $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
             /** @var ChatSessionRepository $chatSessionRepository */
-            $chatSessionRepository = $objectManager->get(ChatSessionRepository::class);
+            $chatSessionRepository = GeneralUtility::makeInstance(ChatSessionRepository::class);
             /** @var PersistenceManager $persistenceManager */
-            $persistenceManager = $objectManager->get(PersistenceManager::class);
+            $persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
 
             $chatSession = $chatSessionRepository->findBySenderToken($senderToken);
 
@@ -198,13 +187,8 @@ class AjaxRoutes implements MiddlewareInterface
         $message = $content->message;
 
         if (!empty($senderToken) && !(empty($message))) {
-            /*
-            * Change for T3 v11
-            */
-            /** @var ObjectManager $objectManager */
-            $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
             /** @var ChatSessionRepository $chatSessionRepository */
-            $chatSessionRepository = $objectManager->get(ChatSessionRepository::class);
+            $chatSessionRepository = GeneralUtility::makeInstance(ChatSessionRepository::class);
 
             /** @var ChatSession $chatSession */
             $chatSession = $chatSessionRepository->findBySenderToken($senderToken);

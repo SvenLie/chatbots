@@ -78,9 +78,15 @@ window.onload = function () {
                                                 for (let i = 0; i < data.length; i++) {
                                                     const message = data[i];
 
-                                                    appendMessage(message.text, true)
+                                                    if (message.text) {
+                                                        appendMessage(message.text, true)
+                                                    } else if (message.image) {
+                                                        appendImage(message.image, true)
+                                                    }
+
                                                 }
                                             }
+                                            messagesDiv.scrollTop = messagesDiv.scrollHeight
                                         }
                                     )
                                 }
@@ -127,6 +133,21 @@ window.onload = function () {
         }
 
         newMessageDiv.innerHTML = text
+
+        messagesDiv.append(newMessageDiv)
+    }
+
+    const appendImage = (image) => {
+        let newMessageDiv = document.createElement("div");
+        newMessageDiv.classList.add('message')
+
+        newMessageDiv.classList.add('message-left')
+
+        var element = document.createElement("img");
+        element.setAttribute("src", image)
+        element.setAttribute("width", "100%");
+
+        newMessageDiv.appendChild(element)
 
         messagesDiv.append(newMessageDiv)
     }

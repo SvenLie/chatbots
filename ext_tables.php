@@ -19,7 +19,7 @@
     'overview',
     'top',
     [
-        'Backend\\Overview' => 'index, startTraining, activateModel, deleteModel'
+        \SvenLie\ChatbotRasa\Controller\Backend\OverviewController::class => 'index, startTraining, activateModel, deleteModel'
     ],
     [
         'access' => 'admin',
@@ -34,7 +34,7 @@
     'training_data',
     'after:overview',
     [
-        'Backend\\TrainingData' => 'index, delete, showUpdate, update, showAdd, add'
+        \SvenLie\ChatbotRasa\Controller\Backend\TrainingDataController::class => 'index, delete, showUpdate, update, showAdd, add'
     ],
     [
         'access' => 'admin',
@@ -49,7 +49,7 @@
     'responses',
     'after:training_data',
     [
-        'Backend\\Response' => 'index, delete, showUpdate, update, showAdd, add'
+        \SvenLie\ChatbotRasa\Controller\Backend\ResponseController::class => 'index, delete, showUpdate, update, showAdd, add'
     ],
     [
         'access' => 'admin',
@@ -64,7 +64,7 @@
     'stories',
     'after:responses',
     [
-        'Backend\\Story' => 'index, delete, showUpdate, update, after, showAdd, add'
+        \SvenLie\ChatbotRasa\Controller\Backend\StoryController::class => 'index, delete, showUpdate, update, after, showAdd, add'
     ],
     [
         'access' => 'admin',
@@ -79,7 +79,7 @@
     'rules',
     'after:stories',
     [
-        'Backend\\Rule' => 'index, delete, showUpdate, update, after, showAdd, add'
+        \SvenLie\ChatbotRasa\Controller\Backend\RuleController::class => 'index, delete, showUpdate, update, after, showAdd, add'
     ],
     [
         'access' => 'admin',
@@ -94,7 +94,7 @@
     'configuration',
     'bottom',
     [
-        'Backend\\Configuration' => 'index, save'
+        \SvenLie\ChatbotRasa\Controller\Backend\ConfigurationController::class => 'index, save'
     ],
     [
         'access' => 'admin',

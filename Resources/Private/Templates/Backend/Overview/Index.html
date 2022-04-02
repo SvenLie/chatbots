@@ -8,12 +8,16 @@
             key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_overview.xlf:mlang_tabs_tab"/>
     </h1>
     <f:if condition="{isValid}">
-        <f:render partial="Backend/Overview/HealthCheck" arguments="{healthChecks: healthChecks}"/>
-        <div class="col-md-12">
-            <f:render partial="Backend/Overview/StartTraining"/>
-            <br/>
-            <br/>
-            <f:render partial="Backend/Overview/ExistingModels" arguments="{trainedModels: trainedModels}"/>
+        <div class="container">
+            <div class="row">
+                <f:render partial="Backend/Overview/HealthCheck" arguments="{healthChecks: healthChecks}"/>
+            </div>
+            <div class="row">
+                <f:render partial="Backend/Overview/StartTraining"/>
+                <br/>
+                <br/>
+                <f:render partial="Backend/Overview/ExistingModels" arguments="{trainedModels: trainedModels}"/>
+            </div>
         </div>
     </f:if>
 </f:section>

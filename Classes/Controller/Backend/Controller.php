@@ -53,7 +53,6 @@ class Controller extends ActionController
 
     public function __construct(ExtensionConfiguration $extensionConfiguration)
     {
-        parent::__construct();
         $this->extensionConfiguration = $extensionConfiguration;
         $this->iconFactory = GeneralUtility::makeInstance(IconFactory::class);
     }

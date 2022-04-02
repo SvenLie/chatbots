@@ -122,7 +122,26 @@ class RasaApiUtility
             $uri = $this->instanceUrl . "/api/chatToken";
         }
 
-        return $this->doGetRequestAndReturnContent($accessToken, $uri);
+        try {
+            $additionalOptions = [
+                'headers' => ['Authorization' => 'Bearer ' . $accessToken],
+                'body' => json_encode(["bot_name" => 'Chatbot'])
+            ];
+
+            /** @var Response $response */
+            $response = $this->requestFactory->request($uri, "PUT", $additionalOptions);
+
+        } catch (RequestException $exception) {
+            return false;
+        }
+
+        if ($response->getStatusCode() === 200) {
+            return json_decode($response->getBody()->getContents());
+        } else {
+            return false;
+        }
+
+        //return $this->doGetRequestAndReturnContent($accessToken, $uri);
     }
 
     public function getHealthStatus($accessToken)
