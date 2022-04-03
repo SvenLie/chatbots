@@ -2,8 +2,8 @@
 
 return [
     'frontend' => [
-        'svenlie/chatbot_rasa/ajax-routes' => [
-            'target' => \SvenLie\ChatbotRasa\Middleware\AjaxRoutes::class,
+        'svenlie/chatbots/ajax-routes' => [
+            'target' => \SvenLie\Chatbots\Middleware\AjaxRoutes::class,
             'before' => [
                 'typo3/cms-frontend/base-redirect-resolver',
             ],

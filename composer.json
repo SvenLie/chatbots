@@ -1,5 +1,5 @@
 {
-    "name": "svenlie/chatbot-rasa",
+    "name": "svenlie/chatbots",
     "type": "typo3-cms-extension",
     "description": "",
     "authors": [
@@ -8,16 +8,21 @@
         "email": "mail@sven-liebert.de"
       }
     ],
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "chatbots"
+        }
+    },
     "require": {
-        "typo3/cms-core": "^9.5 || ^10.4 || ^11.5"
+        "typo3/cms-core": "^10.4 || ^11.5"
     },
     "autoload": {
         "psr-4": {
-            "SvenLie\\ChatbotRasa\\": "Classes"
+            "SvenLie\\Chatbots\\": "Classes"
         }
     },
     "replace": {
-        "svenlie/chatbot-rasa": "self.version",
-        "typo3-ter/chatbot-rasa": "self.version"
+        "svenlie/chatbots": "self.version",
+        "typo3-ter/chatbots": "self.version"
     }
 }

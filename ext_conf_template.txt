@@ -1,8 +1,8 @@
-# cat=RASA; type=string; label=LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_configuration.xlf:rasa_url
+# cat=RASA; type=string; label=LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_configuration.xlf:rasa_url
 rasaUrl =
 
-# cat=RASA; type=string; label=LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_configuration.xlf:rasa_username
+# cat=RASA; type=string; label=LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_configuration.xlf:rasa_username
 rasaUsername =
 
-# cat=RASA; type=string; label=LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_configuration.xlf:rasa_password
+# cat=RASA; type=string; label=LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_configuration.xlf:rasa_password
 rasaPassword =

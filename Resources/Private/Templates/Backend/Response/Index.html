@@ -5,7 +5,7 @@
 <f:section name="Content">
     <h1>
         <f:translate
-            key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_response.xlf:mlang_tabs_tab"/>
+            key="LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_response.xlf:mlang_tabs_tab"/>
     </h1>
 
     <div class="col-md-12">
@@ -13,11 +13,11 @@
             <tr>
                 <th>
                     <f:translate
-                        key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:text"/>
+                        key="LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod.xlf:text"/>
                 </th>
                 <th>
                     <f:translate
-                        key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:response_name"/>
+                        key="LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod.xlf:response_name"/>
                 </th>
                 <th></th>
                 <th></th>
@@ -30,13 +30,13 @@
                         <f:link.action action="showUpdate"
                                        arguments="{responseId: '{response.id}', responseText: '{response.text}',responseName: '{response.response_name}'}">
                             <f:translate
-                                key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:edit"/>
+                                key="LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod.xlf:edit"/>
                         </f:link.action>
                     </td>
                     <td class="small">
                         <f:link.action action="delete" arguments="{responseId: '{response.id}'}">
                             <f:translate
-                                key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:delete"/>
+                                key="LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod.xlf:delete"/>
                         </f:link.action>
                     </td>
                 </tr>

@@ -1,16 +1,16 @@
 <?php
 
-namespace SvenLie\ChatbotRasa\Middleware;
+namespace SvenLie\Chatbots\Middleware;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use SvenLie\ChatbotRasa\Domain\Model\ChatSession;
-use SvenLie\ChatbotRasa\Domain\Model\User;
-use SvenLie\ChatbotRasa\Domain\Repository\ChatSessionRepository;
-use SvenLie\ChatbotRasa\Utility\ExtensionConfigurationUtility;
-use SvenLie\ChatbotRasa\Utility\RasaApiUtility;
+use SvenLie\Chatbots\Domain\Model\ChatSession;
+use SvenLie\Chatbots\Domain\Model\User;
+use SvenLie\Chatbots\Domain\Repository\ChatSessionRepository;
+use SvenLie\Chatbots\Utility\ExtensionConfigurationUtility;
+use SvenLie\Chatbots\Utility\RasaApiUtility;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Http\Response;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -44,7 +44,7 @@ class AjaxRoutes implements MiddlewareInterface
         $this->extensionConfiguration = $this->extensionConfigurationUtility->getExtensionConfiguration();
 
         if ($this->extensionConfigurationUtility->isExtensionConfigurationValid()) {
-            $rasaUrl = $this->extensionConfiguration->get('chatbot_rasa', 'rasaUrl');
+            $rasaUrl = $this->extensionConfiguration->get('chatbots', 'rasaUrl');
             $this->rasaApiUtility = new RasaApiUtility($rasaUrl);
         } else {
             return $handler->handle($request);
@@ -200,7 +200,7 @@ class AjaxRoutes implements MiddlewareInterface
                 if (!empty($chatResponse)) {
                     $response->getBody()->write(json_encode($chatResponse));
                 } else {
-                    $message = json_encode([['text' => LocalizationUtility::translate("LLL:EXT:chatbot_rasa/Resources/Private/Language/locallang.xlf:no-content")]]);
+                    $message = json_encode([['text' => LocalizationUtility::translate("LLL:EXT:chatbots/Resources/Private/Language/locallang.xlf:no-content")]]);
                     $response->getBody()->write($message);
                 }
                 $status = 200;
@@ -223,8 +223,8 @@ class AjaxRoutes implements MiddlewareInterface
 
     protected function authenticateUser()
     {
-        $rasaUsername = $this->extensionConfiguration->get('chatbot_rasa', 'rasaUsername');
-        $rasaPassword = $this->extensionConfiguration->get('chatbot_rasa', 'rasaPassword');
+        $rasaUsername = $this->extensionConfiguration->get('chatbots', 'rasaUsername');
+        $rasaPassword = $this->extensionConfiguration->get('chatbots', 'rasaPassword');
 
         $user = new User();
         $user->setUsername($rasaUsername);

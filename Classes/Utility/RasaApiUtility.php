@@ -1,10 +1,10 @@
 <?php
 
-namespace SvenLie\ChatbotRasa\Utility;
+namespace SvenLie\Chatbots\Utility;
 
 use GuzzleHttp\Exception\RequestException;
-use SvenLie\ChatbotRasa\Domain\Model\TrainingData;
-use SvenLie\ChatbotRasa\Domain\Model\User;
+use SvenLie\Chatbots\Domain\Model\TrainingData;
+use SvenLie\Chatbots\Domain\Model\User;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Http\Response;
 use TYPO3\CMS\Core\Utility\DebugUtility;

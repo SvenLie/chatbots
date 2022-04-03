@@ -1,10 +1,10 @@
 <?php
 
-namespace SvenLie\ChatbotRasa\Controller\Backend;
+namespace SvenLie\Chatbots\Controller\Backend;
 
-use SvenLie\ChatbotRasa\Domain\Model\Response;
-use SvenLie\ChatbotRasa\Utility\ExtensionConfigurationUtility;
-use SvenLie\ChatbotRasa\Utility\RasaApiUtility;
+use SvenLie\Chatbots\Domain\Model\Response;
+use SvenLie\Chatbots\Utility\ExtensionConfigurationUtility;
+use SvenLie\Chatbots\Utility\RasaApiUtility;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -32,12 +32,12 @@ class ResponseController extends Controller
 
         if (!$isValid) {
             $this->addFlashMessage(
-                LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:extension_configuration_not_filled'),
+                LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod.xlf:extension_configuration_not_filled'),
                 '',
                 AbstractMessage::ERROR
             );
         } else {
-            $rasaUrl = $this->extensionConfiguration->get('chatbot_rasa', 'rasaUrl');
+            $rasaUrl = $this->extensionConfiguration->get('chatbots', 'rasaUrl');
             $this->rasaApiUtility = new RasaApiUtility($rasaUrl);
 
             $accessToken = $this->authenticate($this->rasaApiUtility);
@@ -49,7 +49,7 @@ class ResponseController extends Controller
                 $this->view->assign('responses', $responses);
             } else {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:connection_not_working'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod.xlf:connection_not_working'),
                     '',
                     AbstractMessage::ERROR
                 );
@@ -68,7 +68,7 @@ class ResponseController extends Controller
             $responseText = $this->request->getArgument('responseText');
             $responseName = $this->request->getArgument('responseName');
 
-            $rasaUrl = $this->extensionConfiguration->get('chatbot_rasa', 'rasaUrl');
+            $rasaUrl = $this->extensionConfiguration->get('chatbots', 'rasaUrl');
             $this->rasaApiUtility = new RasaApiUtility($rasaUrl);
             $accessToken = $this->authenticate($this->rasaApiUtility);
 
@@ -83,7 +83,7 @@ class ResponseController extends Controller
 
         } else {
             $this->addFlashMessage(
-                LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_response.xlf:response_not_valid'),
+                LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_response.xlf:response_not_valid'),
                 '',
                 AbstractMessage::ERROR
             );
@@ -101,7 +101,7 @@ class ResponseController extends Controller
 
             if (!preg_match("/utter_\w+/", $responseName)) {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_response.xlf:response_name_invalid'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_response.xlf:response_name_invalid'),
                     '',
                     AbstractMessage::ERROR
                 );
@@ -109,7 +109,7 @@ class ResponseController extends Controller
                 $this->redirect('index');
             }
 
-            $rasaUrl = $this->extensionConfiguration->get('chatbot_rasa', 'rasaUrl');
+            $rasaUrl = $this->extensionConfiguration->get('chatbots', 'rasaUrl');
             $this->rasaApiUtility = new RasaApiUtility($rasaUrl);
             $accessToken = $this->authenticate($this->rasaApiUtility);
 
@@ -122,14 +122,14 @@ class ResponseController extends Controller
 
             if ($isResponseUpdated) {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_response.xlf:response_updated'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_response.xlf:response_updated'),
                     '',
                     AbstractMessage::OK
                 );
                 $this->redirect('index');
             } else {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_response.xlf:response_not_updated'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_response.xlf:response_not_updated'),
                     '',
                     AbstractMessage::ERROR
                 );
@@ -139,7 +139,7 @@ class ResponseController extends Controller
 
         } else {
             $this->addFlashMessage(
-                LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_response.xlf:response_not_valid'),
+                LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_response.xlf:response_not_valid'),
                 '',
                 AbstractMessage::ERROR
             );
@@ -151,7 +151,7 @@ class ResponseController extends Controller
     public function showAddAction()
     {
         $this->createBackButton();
-        $rasaUrl = $this->extensionConfiguration->get('chatbot_rasa', 'rasaUrl');
+        $rasaUrl = $this->extensionConfiguration->get('chatbots', 'rasaUrl');
         $this->rasaApiUtility = new RasaApiUtility($rasaUrl);
         $accessToken = $this->authenticate($this->rasaApiUtility);
 
@@ -170,7 +170,7 @@ class ResponseController extends Controller
 
             if (!preg_match("/utter_\w+/", $responseName)) {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_response.xlf:response_name_invalid'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_response.xlf:response_name_invalid'),
                     '',
                     AbstractMessage::ERROR
                 );
@@ -178,7 +178,7 @@ class ResponseController extends Controller
                 $this->redirect('showAdd');
             }
 
-            $rasaUrl = $this->extensionConfiguration->get('chatbot_rasa', 'rasaUrl');
+            $rasaUrl = $this->extensionConfiguration->get('chatbots', 'rasaUrl');
             $this->rasaApiUtility = new RasaApiUtility($rasaUrl);
             $accessToken = $this->authenticate($this->rasaApiUtility);
 
@@ -190,14 +190,14 @@ class ResponseController extends Controller
 
             if ($isResponseAdded) {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_response.xlf:response_added'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_response.xlf:response_added'),
                     '',
                     AbstractMessage::OK
                 );
                 $this->redirect('index');
             } else {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_response.xlf:response_not_added'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_response.xlf:response_not_added'),
                     '',
                     AbstractMessage::ERROR
                 );
@@ -207,7 +207,7 @@ class ResponseController extends Controller
 
         } else {
             $this->addFlashMessage(
-                LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_response.xlf:response_not_valid'),
+                LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_response.xlf:response_not_valid'),
                 '',
                 AbstractMessage::ERROR
             );
@@ -220,7 +220,7 @@ class ResponseController extends Controller
     {
         if ($this->request->hasArgument('responseId')) {
             $responseId = $this->request->getArgument('responseId');
-            $rasaUrl = $this->extensionConfiguration->get('chatbot_rasa', 'rasaUrl');
+            $rasaUrl = $this->extensionConfiguration->get('chatbots', 'rasaUrl');
             $this->rasaApiUtility = new RasaApiUtility($rasaUrl);
 
             $accessToken = $this->authenticate($this->rasaApiUtility);
@@ -229,13 +229,13 @@ class ResponseController extends Controller
 
             if ($isModelDeleted) {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_response.xlf:response_deleted'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_response.xlf:response_deleted'),
                     '',
                     AbstractMessage::OK
                 );
             } else {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_response.xlf:response_not_deleted'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_response.xlf:response_not_deleted'),
                     '',
                     AbstractMessage::ERROR
                 );
@@ -244,7 +244,7 @@ class ResponseController extends Controller
 
         } else {
             $this->addFlashMessage(
-                LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_response.xlf:response_not_deleted'),
+                LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_response.xlf:response_not_deleted'),
                 '',
                 AbstractMessage::ERROR
             );

@@ -1,7 +1,7 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 <b>
     <f:translate
-        key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_overview.xlf:existing_models"/>
+        key="LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_overview.xlf:existing_models"/>
 </b>
 <br/>
 <br/>
@@ -10,7 +10,7 @@
     <tr>
         <th>
             <f:translate
-                key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:name"/>
+                key="LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod.xlf:name"/>
         </th>
         <th></th>
         <th></th>
@@ -21,14 +21,14 @@
                 {trainedModel.model}
                 <f:if condition="{trainedModel.tags}">
                     <f:translate
-                        key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_overview.xlf:active"/>
+                        key="LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_overview.xlf:active"/>
                 </f:if>
             </td>
             <td class="small">
                 <f:if condition="!{trainedModel.tags}">
                     <f:link.action action="activateModel" arguments="{modelName: '{trainedModel.model}'}">
                         <f:translate
-                            key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_overview.xlf:activate"/>
+                            key="LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_overview.xlf:activate"/>
                     </f:link.action>
                 </f:if>
             </td>
@@ -36,7 +36,7 @@
                 <f:if condition="!{trainedModel.tags}">
                     <f:link.action action="deleteModel" arguments="{modelName: '{trainedModel.model}'}">
                         <f:translate
-                            key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:delete"/>
+                            key="LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod.xlf:delete"/>
                     </f:link.action>
 
                 </f:if>

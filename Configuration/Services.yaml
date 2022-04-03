@@ -5,6 +5,6 @@ services:
     autoconfigure: true
     public: false
 
-  SvenLie\ChatbotRasa\:
+  SvenLie\Chatbots\:
     resource: '../Classes/*'
     exclude: '../Classes/Domain/Model/*'

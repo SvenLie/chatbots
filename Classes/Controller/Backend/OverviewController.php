@@ -1,9 +1,9 @@
 <?php
 
-namespace SvenLie\ChatbotRasa\Controller\Backend;
+namespace SvenLie\Chatbots\Controller\Backend;
 
-use SvenLie\ChatbotRasa\Utility\ExtensionConfigurationUtility;
-use SvenLie\ChatbotRasa\Utility\RasaApiUtility;
+use SvenLie\Chatbots\Utility\ExtensionConfigurationUtility;
+use SvenLie\Chatbots\Utility\RasaApiUtility;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -33,12 +33,12 @@ class OverviewController extends Controller
 
         if (!$isValid) {
             $this->addFlashMessage(
-                LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:extension_configuration_not_filled'),
+                LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod.xlf:extension_configuration_not_filled'),
                 '',
                 AbstractMessage::ERROR
             );
         } else {
-            $rasaUrl = $this->extensionConfiguration->get('chatbot_rasa', 'rasaUrl');
+            $rasaUrl = $this->extensionConfiguration->get('chatbots', 'rasaUrl');
             $this->rasaApiUtility = new RasaApiUtility($rasaUrl);
 
             $accessToken = $this->authenticate($this->rasaApiUtility);
@@ -50,7 +50,7 @@ class OverviewController extends Controller
                 $this->view->assign('trainedModels', $trainedModels);
             } else {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:connection_not_working'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod.xlf:connection_not_working'),
                     '',
                     AbstractMessage::ERROR
                 );
@@ -67,12 +67,12 @@ class OverviewController extends Controller
 
         if (!$isValid) {
             $this->addFlashMessage(
-                LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:extension_configuration_not_filled'),
+                LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod.xlf:extension_configuration_not_filled'),
                 '',
                 AbstractMessage::ERROR
             );
         } else {
-            $rasaUrl = $this->extensionConfiguration->get('chatbot_rasa', 'rasaUrl');
+            $rasaUrl = $this->extensionConfiguration->get('chatbots', 'rasaUrl');
             $this->rasaApiUtility = new RasaApiUtility($rasaUrl);
 
             $accessToken = $this->authenticate($this->rasaApiUtility);
@@ -81,13 +81,13 @@ class OverviewController extends Controller
 
             if ($response) {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_overview.xlf:training_started'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_overview.xlf:training_started'),
                     '',
                     AbstractMessage::OK
                 );
             } else {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_overview.xlf:training_not_started'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_overview.xlf:training_not_started'),
                     '',
                     AbstractMessage::ERROR
                 );
@@ -101,7 +101,7 @@ class OverviewController extends Controller
     {
         if ($this->request->hasArgument('modelName')) {
             $modelName = $this->request->getArgument('modelName');
-            $rasaUrl = $this->extensionConfiguration->get('chatbot_rasa', 'rasaUrl');
+            $rasaUrl = $this->extensionConfiguration->get('chatbots', 'rasaUrl');
             $this->rasaApiUtility = new RasaApiUtility($rasaUrl);
 
             $accessToken = $this->authenticate($this->rasaApiUtility);
@@ -110,13 +110,13 @@ class OverviewController extends Controller
 
             if ($isModelMarkedAsActive) {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_overview.xlf:model_activated'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_overview.xlf:model_activated'),
                     '',
                     AbstractMessage::OK
                 );
             } else {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_overview.xlf:model_not_activated'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_overview.xlf:model_not_activated'),
                     '',
                     AbstractMessage::ERROR
                 );
@@ -125,7 +125,7 @@ class OverviewController extends Controller
 
         } else {
             $this->addFlashMessage(
-                LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_overview.xlf:model_not_activated'),
+                LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_overview.xlf:model_not_activated'),
                 '',
                 AbstractMessage::ERROR
             );
@@ -137,7 +137,7 @@ class OverviewController extends Controller
     {
         if ($this->request->hasArgument('modelName')) {
             $modelName = $this->request->getArgument('modelName');
-            $rasaUrl = $this->extensionConfiguration->get('chatbot_rasa', 'rasaUrl');
+            $rasaUrl = $this->extensionConfiguration->get('chatbots', 'rasaUrl');
             $this->rasaApiUtility = new RasaApiUtility($rasaUrl);
 
             $accessToken = $this->authenticate($this->rasaApiUtility);
@@ -146,13 +146,13 @@ class OverviewController extends Controller
 
             if ($isModelDeleted) {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:model_deleted'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod.xlf:model_deleted'),
                     '',
                     AbstractMessage::OK
                 );
             } else {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:model_not_deleted'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod.xlf:model_not_deleted'),
                     '',
                     AbstractMessage::ERROR
                 );
@@ -161,7 +161,7 @@ class OverviewController extends Controller
 
         } else {
             $this->addFlashMessage(
-                LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:model_not_deleted'),
+                LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod.xlf:model_not_deleted'),
                 '',
                 AbstractMessage::ERROR
             );

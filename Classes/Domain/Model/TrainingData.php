@@ -1,6 +1,6 @@
 <?php
 
-namespace SvenLie\ChatbotRasa\Domain\Model;
+namespace SvenLie\Chatbots\Domain\Model;
 
 class TrainingData
 {
