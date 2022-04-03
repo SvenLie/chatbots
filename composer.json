@@ -2,7 +2,6 @@
     "name": "svenlie/chatbots",
     "type": "typo3-cms-extension",
     "description": "",
-    "version": "1.0.0",
     "authors": [
       {
         "name": "Sven Liebert",
