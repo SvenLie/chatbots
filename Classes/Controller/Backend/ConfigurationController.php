@@ -1,6 +1,6 @@
 <?php
 
-namespace SvenLie\ChatbotRasa\Controller\Backend;
+namespace SvenLie\Chatbots\Controller\Backend;
 
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
@@ -10,7 +10,7 @@ class ConfigurationController extends Controller
 {
     protected string $controllerName = 'Backend\Configuration';
 
-    protected string $moduleName = 'chatbotRasaChatbot_ChatbotRasaConfiguration';
+    protected string $moduleName = 'chatbotChatbot_ChatbotRasaConfiguration';
 
     /**
      * @var ExtensionConfiguration
@@ -25,14 +25,13 @@ class ConfigurationController extends Controller
 
     public function indexAction()
     {
-        $this->view->assign('rasaUrl', $this->extensionConfiguration->get('chatbot_rasa', 'rasaUrl'));
-        $this->view->assign('rasaUsername', $this->extensionConfiguration->get('chatbot_rasa', 'rasaUsername'));
-        $this->view->assign('rasaPassword', $this->extensionConfiguration->get('chatbot_rasa', 'rasaPassword'));
+        $this->view->assign('rasaUrl', $this->extensionConfiguration->get('chatbots', 'rasaUrl'));
+        $this->view->assign('rasaUsername', $this->extensionConfiguration->get('chatbots', 'rasaUsername'));
+        $this->view->assign('rasaPassword', $this->extensionConfiguration->get('chatbots', 'rasaPassword'));
     }
 
     /**
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
      */
     public function saveAction(): void
@@ -42,13 +41,11 @@ class ConfigurationController extends Controller
         $rasaUsername = $this->request->getArgument('rasaUsername');
         $rasaPassword = $this->request->getArgument('rasaPassword');
 
-        $this->extensionConfiguration->set('chatbot_rasa', 'rasaUrl', $rasaUrl);
-        $this->extensionConfiguration->set('chatbot_rasa', 'rasaUsername', $rasaUsername);
-        $this->extensionConfiguration->set('chatbot_rasa', 'rasaPassword', $rasaPassword);
+        $this->extensionConfiguration->set('chatbots', ['rasaUrl' => $rasaUrl, 'rasaUsername' => $rasaUsername, 'rasaPassword' => $rasaPassword]);
 
 
         $this->addFlashMessage(
-            LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:submit_success'),
+            LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod.xlf:submit_success'),
             '',
             AbstractMessage::OK
         );

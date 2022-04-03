@@ -1,17 +1,17 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 <div class="col-md-4">
-    <div class="panel panel-default">
+    <div class="card">
         <div
-            class="panel-body {f:if(condition: '{healthCheck.status} == 200 || {healthCheck.status} == completed', then: 'label-success', else: 'label-danger')}">
-            <div>
+            class="card-body {f:if(condition: '{healthCheck.status} == 200 || {healthCheck.status} == completed', then: 'bg-success', else: 'bg-danger')}">
+            <div class="card-text">
                 <h1 style="color: white">
                     {heading}
                     <span class="pull-right label">
                         <f:if condition="{healthCheck.status} == 200 || {healthCheck.status} == completed">
                             <f:then><f:translate
-                                key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_overview.xlf:online"/></f:then>
+                                key="LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_overview.xlf:online"/></f:then>
                             <f:else><f:translate
-                                key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_overview.xlf:offline"/></f:else>
+                                key="LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_overview.xlf:offline"/></f:else>
                         </f:if>
                     </span>
                 </h1>
@@ -22,7 +22,7 @@
                         </f:then>
                         <f:else>
                             <span class="badge"><f:translate
-                                key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_overview.xlf:no_version"/></span>
+                                key="LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_overview.xlf:no_version"/></span>
                         </f:else>
                     </f:if>
                 </div>

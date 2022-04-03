@@ -1,19 +1,13 @@
 <?php
 
-namespace SvenLie\ChatbotRasa\Controller\Backend;
+namespace SvenLie\Chatbots\Controller\Backend;
 
-use SvenLie\ChatbotRasa\Domain\Model\TrainingData;
-use SvenLie\ChatbotRasa\Utility\ExtensionConfigurationUtility;
-use SvenLie\ChatbotRasa\Utility\RasaApiUtility;
-use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
-use TYPO3\CMS\Backend\Template\Components\ButtonBar;
-use TYPO3\CMS\Backend\Template\Components\Buttons\LinkButton;
+use SvenLie\Chatbots\Domain\Model\TrainingData;
+use SvenLie\Chatbots\Utility\ExtensionConfigurationUtility;
+use SvenLie\Chatbots\Utility\RasaApiUtility;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
-use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
-use TYPO3\CMS\Core\Utility\DebugUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 class TrainingDataController extends Controller
@@ -42,12 +36,12 @@ class TrainingDataController extends Controller
 
         if (!$isValid) {
             $this->addFlashMessage(
-                LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:extension_configuration_not_filled'),
+                LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod.xlf:extension_configuration_not_filled'),
                 '',
                 AbstractMessage::ERROR
             );
         } else {
-            $rasaUrl = $this->extensionConfiguration->get('chatbot_rasa', 'rasaUrl');
+            $rasaUrl = $this->extensionConfiguration->get('chatbots', 'rasaUrl');
             $this->rasaApiUtility = new RasaApiUtility($rasaUrl);
 
             $accessToken = $this->authenticate($this->rasaApiUtility);
@@ -59,7 +53,7 @@ class TrainingDataController extends Controller
                 $this->view->assign('trainingData', $trainingData);
             } else {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:connection_not_working'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod.xlf:connection_not_working'),
                     '',
                     AbstractMessage::ERROR
                 );
@@ -74,7 +68,7 @@ class TrainingDataController extends Controller
     {
         if ($this->request->hasArgument('trainingDataId')) {
             $trainingDataId = $this->request->getArgument('trainingDataId');
-            $rasaUrl = $this->extensionConfiguration->get('chatbot_rasa', 'rasaUrl');
+            $rasaUrl = $this->extensionConfiguration->get('chatbots', 'rasaUrl');
             $this->rasaApiUtility = new RasaApiUtility($rasaUrl);
 
             $accessToken = $this->authenticate($this->rasaApiUtility);
@@ -83,13 +77,13 @@ class TrainingDataController extends Controller
 
             if ($isModelDeleted) {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:training_data_deleted'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:training_data_deleted'),
                     '',
                     AbstractMessage::OK
                 );
             } else {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:training_data_not_deleted'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:training_data_not_deleted'),
                     '',
                     AbstractMessage::ERROR
                 );
@@ -98,7 +92,7 @@ class TrainingDataController extends Controller
 
         } else {
             $this->addFlashMessage(
-                LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:training_data_not_deleted'),
+                LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:training_data_not_deleted'),
                 '',
                 AbstractMessage::ERROR
             );
@@ -114,7 +108,7 @@ class TrainingDataController extends Controller
             $trainingDataText = $this->request->getArgument('trainingDataText');
             $trainingDataIntent = $this->request->getArgument('trainingDataIntent');
 
-            $rasaUrl = $this->extensionConfiguration->get('chatbot_rasa', 'rasaUrl');
+            $rasaUrl = $this->extensionConfiguration->get('chatbots', 'rasaUrl');
             $this->rasaApiUtility = new RasaApiUtility($rasaUrl);
             $accessToken = $this->authenticate($this->rasaApiUtility);
 
@@ -129,7 +123,7 @@ class TrainingDataController extends Controller
 
         } else {
             $this->addFlashMessage(
-                LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:training_data_not_valid'),
+                LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:training_data_not_valid'),
                 '',
                 AbstractMessage::ERROR
             );
@@ -145,7 +139,7 @@ class TrainingDataController extends Controller
             $trainingDataText = $this->request->getArgument('trainingDataText');
             $trainingDataIntent = $this->request->getArgument('trainingDataIntent');
 
-            $rasaUrl = $this->extensionConfiguration->get('chatbot_rasa', 'rasaUrl');
+            $rasaUrl = $this->extensionConfiguration->get('chatbots', 'rasaUrl');
             $this->rasaApiUtility = new RasaApiUtility($rasaUrl);
             $accessToken = $this->authenticate($this->rasaApiUtility);
 
@@ -158,14 +152,14 @@ class TrainingDataController extends Controller
 
             if ($isTrainingDataUpdated) {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:training_data_updated'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:training_data_updated'),
                     '',
                     AbstractMessage::OK
                 );
                 $this->redirect('index');
             } else {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:training_data_not_updated'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:training_data_not_updated'),
                     '',
                     AbstractMessage::ERROR
                 );
@@ -175,7 +169,7 @@ class TrainingDataController extends Controller
 
         } else {
             $this->addFlashMessage(
-                LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:training_data_not_valid'),
+                LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:training_data_not_valid'),
                 '',
                 AbstractMessage::ERROR
             );
@@ -187,7 +181,7 @@ class TrainingDataController extends Controller
     public function showAddAction()
     {
         $this->createBackButton();
-        $rasaUrl = $this->extensionConfiguration->get('chatbot_rasa', 'rasaUrl');
+        $rasaUrl = $this->extensionConfiguration->get('chatbots', 'rasaUrl');
         $this->rasaApiUtility = new RasaApiUtility($rasaUrl);
         $accessToken = $this->authenticate($this->rasaApiUtility);
 
@@ -204,7 +198,7 @@ class TrainingDataController extends Controller
             $trainingDataText = $this->request->getArgument('trainingDataText');
             $trainingDataIntent = $this->request->getArgument('trainingDataIntent');
 
-            $rasaUrl = $this->extensionConfiguration->get('chatbot_rasa', 'rasaUrl');
+            $rasaUrl = $this->extensionConfiguration->get('chatbots', 'rasaUrl');
             $this->rasaApiUtility = new RasaApiUtility($rasaUrl);
             $accessToken = $this->authenticate($this->rasaApiUtility);
 
@@ -216,14 +210,14 @@ class TrainingDataController extends Controller
 
             if ($isTrainingDataAdded) {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:training_data_added'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:training_data_added'),
                     '',
                     AbstractMessage::OK
                 );
                 $this->redirect('index');
             } else {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:training_data_not_added'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:training_data_not_added'),
                     '',
                     AbstractMessage::ERROR
                 );
@@ -233,7 +227,7 @@ class TrainingDataController extends Controller
 
         } else {
             $this->addFlashMessage(
-                LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:training_data_not_valid'),
+                LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:training_data_not_valid'),
                 '',
                 AbstractMessage::ERROR
             );

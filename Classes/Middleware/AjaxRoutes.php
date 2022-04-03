@@ -1,20 +1,19 @@
 <?php
 
-namespace SvenLie\ChatbotRasa\Middleware;
+namespace SvenLie\Chatbots\Middleware;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use SvenLie\ChatbotRasa\Domain\Model\ChatSession;
-use SvenLie\ChatbotRasa\Domain\Model\User;
-use SvenLie\ChatbotRasa\Domain\Repository\ChatSessionRepository;
-use SvenLie\ChatbotRasa\Utility\ExtensionConfigurationUtility;
-use SvenLie\ChatbotRasa\Utility\RasaApiUtility;
+use SvenLie\Chatbots\Domain\Model\ChatSession;
+use SvenLie\Chatbots\Domain\Model\User;
+use SvenLie\Chatbots\Domain\Repository\ChatSessionRepository;
+use SvenLie\Chatbots\Utility\ExtensionConfigurationUtility;
+use SvenLie\Chatbots\Utility\RasaApiUtility;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Http\Response;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
@@ -45,7 +44,7 @@ class AjaxRoutes implements MiddlewareInterface
         $this->extensionConfiguration = $this->extensionConfigurationUtility->getExtensionConfiguration();
 
         if ($this->extensionConfigurationUtility->isExtensionConfigurationValid()) {
-            $rasaUrl = $this->extensionConfiguration->get('chatbot_rasa', 'rasaUrl');
+            $rasaUrl = $this->extensionConfiguration->get('chatbots', 'rasaUrl');
             $this->rasaApiUtility = new RasaApiUtility($rasaUrl);
         } else {
             return $handler->handle($request);
@@ -95,8 +94,8 @@ class AjaxRoutes implements MiddlewareInterface
         if ($accessToken) {
             $chatTokenResponse = $this->rasaApiUtility->getChatToken($accessToken);
 
-            if (!empty($chatTokenResponse['chat_token'])) {
-                $chatToken = $chatTokenResponse['chat_token'];
+            if (!empty($chatTokenResponse->chat_token)) {
+                $chatToken = $chatTokenResponse->chat_token;
 
                 $jwtAccessTokenResponse = $this->rasaApiUtility->authenticateWithChatToken($chatToken);
 
@@ -110,15 +109,10 @@ class AjaxRoutes implements MiddlewareInterface
                     $chatSession->setAccessToken($jwtAccessToken);
                     $chatSession->setTimestamp(time());
 
-                    /*
-                     * Change for T3 v11
-                     */
-                    /** @var ObjectManager $objectManager */
-                    $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
                     /** @var ChatSessionRepository $chatSessionRepository */
-                    $chatSessionRepository = $objectManager->get(ChatSessionRepository::class);
+                    $chatSessionRepository = GeneralUtility::makeInstance(ChatSessionRepository::class);
                     /** @var PersistenceManager $persistenceManager */
-                    $persistenceManager = $objectManager->get(PersistenceManager::class);
+                    $persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
 
                     $chatSessionRepository->add($chatSession);
                     $persistenceManager->persistAll();
@@ -157,15 +151,10 @@ class AjaxRoutes implements MiddlewareInterface
         $senderToken = $content->sender_token;
 
         if (!empty($senderToken)) {
-            /*
-            * Change for T3 v11
-            */
-            /** @var ObjectManager $objectManager */
-            $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
             /** @var ChatSessionRepository $chatSessionRepository */
-            $chatSessionRepository = $objectManager->get(ChatSessionRepository::class);
+            $chatSessionRepository = GeneralUtility::makeInstance(ChatSessionRepository::class);
             /** @var PersistenceManager $persistenceManager */
-            $persistenceManager = $objectManager->get(PersistenceManager::class);
+            $persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
 
             $chatSession = $chatSessionRepository->findBySenderToken($senderToken);
 
@@ -198,13 +187,8 @@ class AjaxRoutes implements MiddlewareInterface
         $message = $content->message;
 
         if (!empty($senderToken) && !(empty($message))) {
-            /*
-            * Change for T3 v11
-            */
-            /** @var ObjectManager $objectManager */
-            $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
             /** @var ChatSessionRepository $chatSessionRepository */
-            $chatSessionRepository = $objectManager->get(ChatSessionRepository::class);
+            $chatSessionRepository = GeneralUtility::makeInstance(ChatSessionRepository::class);
 
             /** @var ChatSession $chatSession */
             $chatSession = $chatSessionRepository->findBySenderToken($senderToken);
@@ -216,7 +200,7 @@ class AjaxRoutes implements MiddlewareInterface
                 if (!empty($chatResponse)) {
                     $response->getBody()->write(json_encode($chatResponse));
                 } else {
-                    $message = json_encode([['text' => LocalizationUtility::translate("LLL:EXT:chatbot_rasa/Resources/Private/Language/locallang.xlf:no-content")]]);
+                    $message = json_encode([['text' => LocalizationUtility::translate("LLL:EXT:chatbots/Resources/Private/Language/locallang.xlf:no-content")]]);
                     $response->getBody()->write($message);
                 }
                 $status = 200;
@@ -239,8 +223,8 @@ class AjaxRoutes implements MiddlewareInterface
 
     protected function authenticateUser()
     {
-        $rasaUsername = $this->extensionConfiguration->get('chatbot_rasa', 'rasaUsername');
-        $rasaPassword = $this->extensionConfiguration->get('chatbot_rasa', 'rasaPassword');
+        $rasaUsername = $this->extensionConfiguration->get('chatbots', 'rasaUsername');
+        $rasaPassword = $this->extensionConfiguration->get('chatbots', 'rasaPassword');
 
         $user = new User();
         $user->setUsername($rasaUsername);

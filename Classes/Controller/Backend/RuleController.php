@@ -1,9 +1,9 @@
 <?php
 
-namespace SvenLie\ChatbotRasa\Controller\Backend;
+namespace SvenLie\Chatbots\Controller\Backend;
 
-use SvenLie\ChatbotRasa\Utility\ExtensionConfigurationUtility;
-use SvenLie\ChatbotRasa\Utility\RasaApiUtility;
+use SvenLie\Chatbots\Utility\ExtensionConfigurationUtility;
+use SvenLie\Chatbots\Utility\RasaApiUtility;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -42,7 +42,7 @@ class RuleController extends Controller
             // Require Ace editor
             if ($this->actionMethodName == 'showUpdateAction' || $this->actionMethodName == 'showAddAction') {
                 $contribPath = 'Resources/Public/Contrib/';
-                $contribPath = ExtensionManagementUtility::extPath('chatbot_rasa', $contribPath);
+                $contribPath = ExtensionManagementUtility::extPath('chatbots', $contribPath);
                 $pageRenderer->addRequireJsConfiguration([
                     'shim' => [],
                     'paths' => [
@@ -61,12 +61,12 @@ class RuleController extends Controller
 
         if (!$isValid) {
             $this->addFlashMessage(
-                LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:extension_configuration_not_filled'),
+                LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod.xlf:extension_configuration_not_filled'),
                 '',
                 AbstractMessage::ERROR
             );
         } else {
-            $rasaUrl = $this->extensionConfiguration->get('chatbot_rasa', 'rasaUrl');
+            $rasaUrl = $this->extensionConfiguration->get('chatbots', 'rasaUrl');
             $this->rasaApiUtility = new RasaApiUtility($rasaUrl);
 
             $accessToken = $this->authenticate($this->rasaApiUtility);
@@ -78,7 +78,7 @@ class RuleController extends Controller
                 $this->view->assign('rules', $rules);
             } else {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:connection_not_working'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod.xlf:connection_not_working'),
                     '',
                     AbstractMessage::ERROR
                 );
@@ -104,7 +104,7 @@ class RuleController extends Controller
             ]);
         } else {
             $this->addFlashMessage(
-                LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_rule.xlf:rule_not_valid'),
+                LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_rule.xlf:rule_not_valid'),
                 '',
                 AbstractMessage::ERROR
             );
@@ -119,7 +119,7 @@ class RuleController extends Controller
             $ruleId = $this->request->getArgument('id');
             $content = $this->request->getArgument('content');
 
-            $rasaUrl = $this->extensionConfiguration->get('chatbot_rasa', 'rasaUrl');
+            $rasaUrl = $this->extensionConfiguration->get('chatbots', 'rasaUrl');
             $this->rasaApiUtility = new RasaApiUtility($rasaUrl);
             $accessToken = $this->authenticate($this->rasaApiUtility);
 
@@ -146,7 +146,7 @@ class RuleController extends Controller
         if ($this->request->hasArgument('content')) {
             $content = $this->request->getArgument('content');
 
-            $rasaUrl = $this->extensionConfiguration->get('chatbot_rasa', 'rasaUrl');
+            $rasaUrl = $this->extensionConfiguration->get('chatbots', 'rasaUrl');
             $this->rasaApiUtility = new RasaApiUtility($rasaUrl);
             $accessToken = $this->authenticate($this->rasaApiUtility);
 
@@ -175,7 +175,7 @@ class RuleController extends Controller
     {
         if ($this->request->hasArgument('ruleId')) {
             $ruleId = $this->request->getArgument('ruleId');
-            $rasaUrl = $this->extensionConfiguration->get('chatbot_rasa', 'rasaUrl');
+            $rasaUrl = $this->extensionConfiguration->get('chatbots', 'rasaUrl');
             $this->rasaApiUtility = new RasaApiUtility($rasaUrl);
 
             $accessToken = $this->authenticate($this->rasaApiUtility);
@@ -184,13 +184,13 @@ class RuleController extends Controller
 
             if ($isModelDeleted) {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_rule.xlf:rule_deleted'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_rule.xlf:rule_deleted'),
                     '',
                     AbstractMessage::OK
                 );
             } else {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_rule.xlf:rule_not_deleted'),
+                    LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_rule.xlf:rule_not_deleted'),
                     '',
                     AbstractMessage::ERROR
                 );
@@ -199,7 +199,7 @@ class RuleController extends Controller
 
         } else {
             $this->addFlashMessage(
-                LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_rule.xlf:rule_not_deleted'),
+                LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_rule.xlf:rule_not_deleted'),
                 '',
                 AbstractMessage::ERROR
             );

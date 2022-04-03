@@ -1,9 +1,9 @@
 <?php
 
-namespace SvenLie\ChatbotRasa\Controller\Backend;
+namespace SvenLie\Chatbots\Controller\Backend;
 
-use SvenLie\ChatbotRasa\Domain\Model\User;
-use SvenLie\ChatbotRasa\Utility\RasaApiUtility;
+use SvenLie\Chatbots\Domain\Model\User;
+use SvenLie\Chatbots\Utility\RasaApiUtility;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\View\BackendTemplateView;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
@@ -53,7 +53,6 @@ class Controller extends ActionController
 
     public function __construct(ExtensionConfiguration $extensionConfiguration)
     {
-        parent::__construct();
         $this->extensionConfiguration = $extensionConfiguration;
         $this->iconFactory = GeneralUtility::makeInstance(IconFactory::class);
     }
@@ -66,8 +65,8 @@ class Controller extends ActionController
 
     protected function authenticate(RasaApiUtility $rasaApiUtility)
     {
-        $rasaUsername = $this->extensionConfiguration->get('chatbot_rasa', 'rasaUsername');
-        $rasaPassword = $this->extensionConfiguration->get('chatbot_rasa', 'rasaPassword');
+        $rasaUsername = $this->extensionConfiguration->get('chatbots', 'rasaUsername');
+        $rasaPassword = $this->extensionConfiguration->get('chatbots', 'rasaPassword');
 
         $user = new User();
         $user->setUsername($rasaUsername);
@@ -143,8 +142,8 @@ class Controller extends ActionController
     protected function addCssToBackendView()
     {
         if ($this->view instanceof BackendTemplateView) {
-            $this->view->getModuleTemplate()->getPageRenderer()->addCssFile('EXT:chatbot_rasa/Resources/Public/Css/Backend/Table.css');
-            $this->view->getModuleTemplate()->getPageRenderer()->addCssFile('EXT:chatbot_rasa/Resources/Public/Css/Backend/AceEditor.css');
+            $this->view->getModuleTemplate()->getPageRenderer()->addCssFile('EXT:chatbots/Resources/Public/Css/Backend/Table.css');
+            $this->view->getModuleTemplate()->getPageRenderer()->addCssFile('EXT:chatbots/Resources/Public/Css/Backend/AceEditor.css');
         }
     }
 
@@ -161,8 +160,8 @@ class Controller extends ActionController
         ];
 
         $this->view->getModuleTemplate()->getPageRenderer()->addInlineLanguageLabelArray([
-            'not_saved' => LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:not_saved'),
-            'saved' => LocalizationUtility::translate('LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:saved')
+            'not_saved' => LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod.xlf:not_saved'),
+            'saved' => LocalizationUtility::translate('LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod.xlf:saved')
         ]);
 
         $buttonBar = $this->view->getModuleTemplate()->getDocHeaderComponent()->getButtonBar();

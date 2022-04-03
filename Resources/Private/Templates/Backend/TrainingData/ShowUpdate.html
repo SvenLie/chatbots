@@ -5,7 +5,7 @@
 <f:section name="Content">
     <h1>
         <f:translate
-            key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:update_training_data"/>
+            key="LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:update_training_data"/>
     </h1>
     <div class="col-md-12">
         <f:form action="update">
@@ -13,7 +13,7 @@
             <div class="form-group">
                 <label for="trainingDataText">
                     <f:translate
-                        key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:text"/>
+                        key="LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod.xlf:text"/>
                 </label>
                 <f:form.textfield name="trainingDataText" class="form-control" id="trainingDataText"
                                   value="{trainingDataText}"/>
@@ -21,14 +21,14 @@
             <div class="form-group">
                 <label for="trainingDataIntent">
                     <f:translate
-                        key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:intent"/>
+                        key="LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod.xlf:intent"/>
                 </label>
                 <f:form.select name="trainingDataIntent" id="trainingDataIntent" class="form-control"
                                options="{intents}"
                                optionValueField="intent" optionLabelField="intent" value="{trainingDataIntent}">
                     <f:form.select.option value="-1">
                         <f:translate
-                            key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:new_intent"/>
+                            key="LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:new_intent"/>
                     </f:form.select.option>
                 </f:form.select>
             </div>
@@ -36,7 +36,7 @@
             <div class="form-group hidden">
                 <label for="trainingDataIntentOther">
                     <f:translate
-                        key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:new_intent_identifier"/>
+                        key="LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod_training_data.xlf:new_intent_identifier"/>
                 </label>
                 <f:form.textfield name="trainingDataIntent" class="form-control" id="trainingDataIntentOther"
                                   disabled="disabled"/>
@@ -44,7 +44,7 @@
 
             <f:form.button class="btn btn-success">
                 <f:translate
-                    key="LLL:EXT:chatbot_rasa/Resources/Private/Language/Backend/locallang_mod.xlf:submit"/>
+                    key="LLL:EXT:chatbots/Resources/Private/Language/Backend/locallang_mod.xlf:submit"/>
             </f:form.button>
         </f:form>
     </div>
