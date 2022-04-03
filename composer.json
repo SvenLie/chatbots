@@ -23,7 +23,6 @@
         }
     },
     "replace": {
-        "svenlie/chatbots": "self.version",
         "typo3-ter/chatbots": "self.version"
     }
 }
